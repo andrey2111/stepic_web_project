@@ -1,4 +1,4 @@
-def wsgi_application(environ, start_response):
+def app(environ, start_response):
     body = '\n'.join(i for i in environ.get("QUERY_STRING").split('&'))
     status = '200 OK'
     headers = [('Content-Type', 'text/plain')]
