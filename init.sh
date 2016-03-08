@@ -1,7 +1,8 @@
+pip install --upgrade django
 sudo /etc/init.d/mysql restart
-sudo mysql -uroot -pandrey -e  "CREATE DATABASE ask_data"
-sudo mysql -uroot -pandrey -e  "CREATE USER 'andrey'@'localhost' IDENTIFIED BY 'andrey'"
-sudo mysql -uroot -pandrey -e  "GRANT ALL PRIVILEGES ON * . * TO 'andrey'@'localhost'"
+sudo mysql -uroot -e  "CREATE DATABASE ask_data"
+sudo mysql -uroot -e  "CREATE USER 'andrey'@'localhost' IDENTIFIED BY 'andrey'"
+sudo mysql -uroot -e  "GRANT ALL PRIVILEGES ON * . * TO 'andrey'@'localhost'"
 python ask/manage.py makemigrations
 python ask/manage.py migrate
 
