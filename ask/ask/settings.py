@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '3od=fl7v6qw9wy&t3cbx#+*h&(awaq+ee^g148ewvo8l5g3xez'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'qa',
+    'autofixture',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -51,10 +52,11 @@ MIDDLEWARE_CLASSES = [
 
 ROOT_URLCONF = 'ask.urls'
 
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['/home/box/web/ask/qa/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

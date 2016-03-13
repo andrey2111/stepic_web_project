@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}
+    {{ block.super }} – Главная
+{% endblock %}
+{% block content %}
+<ul>
+{% for obj in page.object_list %}
+    <li>
+        <a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a>
+    </li>
+{% endfor %}
+</ul>
+<nav><ul class="pagination">
+{% for p in paginator.page_range %}
+    {% if p == page.number %}
+    <li class="active">
+    {% else %}
+    <li>
+    {% endif %}
+        <a href="{{ paginator.baseurl }}{{ p }}">{{ p }}</a>
+    </li>
+{% endfor %}
+</ul></nav>
+{% endblock %}

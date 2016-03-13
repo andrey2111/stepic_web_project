@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Q&A{% endblock %}</title>
+    {% block extrahead %}{% endblock %}
+    <style>
+        ul.pagination li {
+        display: inline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Вопросы и ответы</h1>
+    {% block content %}{% endblock %}
+</body>
+</html>

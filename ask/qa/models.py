@@ -15,6 +15,9 @@ class Question(models.Model):
     def __unicode__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return '/question/%d/' % self.pk
+
     class Meta:
         db_table = 'questions'
         ordering = ['-added_at']
