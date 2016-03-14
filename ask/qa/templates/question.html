@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}
+    {{ block.super }} – Вопрос #{{ question.id }}
+{% endblock %}
+{% block content %}
+<h2>Вопрос: {{ question.title }}</h2>
+Добавлено: {{ question.added_at }}<br>
+<br>
+{{ question.text }}
+<h2>Популярные ответы:</h2>
+<ul>
+    {% for answer in answers %}
+    <li>
+        Ответ получен от {{ answer.author }} в {{ answer.added_at }}<br>
+        {{ answer.text }}<br>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
