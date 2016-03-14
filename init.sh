@@ -1,4 +1,4 @@
-pip install --upgrade django
+sudo pip install --upgrade django
 sudo /etc/init.d/mysql restart
 sudo mysql -uroot -e  "CREATE DATABASE ask_data"
 sudo mysql -uroot -e  "CREATE USER 'andrey'@'localhost' IDENTIFIED BY 'andrey'"
