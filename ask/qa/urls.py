@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from qa.views import test, main, popular, question
+from views import test, main, popular, question, ask, answer
 
 urlpatterns = [
     url(r'^$', main),
@@ -7,6 +7,7 @@ urlpatterns = [
     url(r'^login/', test),
     url(r'^signup/', test),
     url(r'^question/(?P<id>\d+)/', question),
-    url(r'^ask/', test),
-    url(r'^new/', test)
+    url(r'^ask/', ask),
+    url(r'^new/', test),
+    url(r'answer/', answer),
 ]

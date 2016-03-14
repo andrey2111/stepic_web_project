@@ -1,9 +1,9 @@
 from django.shortcuts import render
-from django.http import Http404
-from django.http import HttpResponse
+from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage
 from models import Question, Answer
-
+from forms import AskForm, AnswerForm
+from django.views.decorators.http import require_POST
 
 def test(request, *args, **kwargs):
     return HttpResponse('OK')
@@ -53,6 +53,7 @@ def popular(request):
 def question(request, id):
     try:
         question = Question.objects.get(pk=id)
+        form = AnswerForm(question)
     except Question.DoesNotExist:
         raise Http404
     try:
@@ -62,4 +63,28 @@ def question(request, id):
     return render(request, 'question.html', {
         'question': question,
         'answers': answers,
+        'form': form,
     })
+
+
+def ask(request):
+    if request.method == 'POST':
+        form = AskForm(request.POST)
+        if form.is_valid():
+            question = form.save()
+            url = question.get_url()
+            return HttpResponseRedirect(url)
+    else:
+        form = AskForm()
+    return render(request, 'ask.html', {
+        'form': form
+    })
+
+
+@require_POST
+def answer(request):
+    form = AnswerForm(Question.objects.get(id=int(request.POST['question'])), request.POST)
+    if form.is_valid():
+        answer = form.save()
+        url = answer.get_question_url()
+        return HttpResponseRedirect(url)

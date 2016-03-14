@@ -15,7 +15,7 @@ class Question(models.Model):
     def __unicode__(self):
         return self.title
 
-    def get_absolute_url(self):
+    def get_url(self):
         return '/question/%d/' % self.pk
 
     class Meta:
@@ -31,6 +31,9 @@ class Answer(models.Model):
 
     def __unicode__(self):
         return str(self.pk)
+
+    def get_question_url(self):
+        return self.question.get_url()
 
     class Meta:
         db_table = 'answers'

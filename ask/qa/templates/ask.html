@@ -1,19 +1,14 @@
 {% extends "base.html" %}
 {% block title %}
-    {{ block.super }} – Вопрос #{{ question.id }}
+    {{ block.super }} – Задать вопрос
 {% endblock %}
 {% block content %}
-<h2>Вопрос: {{ question.title }}</h2>
-Добавлено: {{ question.added_at }}<br>
-<br>
-{{ question.text }}
-<h2>Ответить:</h2>
+Задайте свой вопрос:
 {% for e in form.non_field_errors %}
     <div class="alert alert-danger">{{ e }}</div>
 {% endfor %}
-<form class="form-horizontal" method="post" action="/answer/">
+<form class="form-horizontal" method="post" action="/ask/">
     {% csrf_token %}
-    <input type="hidden" value="{{ question.id }}" name="question">
     {% for field in form %}
         <div class="control-group
             {% if field.errors %}has-error{% endif %}">
@@ -27,13 +22,4 @@
         Отправить</button>
     </div>
 </form>
-<h2>Популярные ответы:</h2>
-<ul>
-    {% for answer in answers %}
-    <li>
-        Ответ получен от {{ answer.author }} в {{ answer.added_at }}<br>
-        {{ answer.text }}<br>
-    </li>
-    {% endfor %}
-</ul>
 {% endblock %}
