@@ -22,7 +22,7 @@ class AskForm(forms.Form):
 
 class AnswerForm(forms.Form):
     text = forms.CharField(widget=forms.Textarea)
-    question = forms.CharField(widget=forms.HiddenInput)
+    question = forms.IntegerField(widget=forms.HiddenInput)
 
     def clean(self):
         if self.cleaned_data['text'].find(u'хуй') > -1:
@@ -32,7 +32,7 @@ class AnswerForm(forms.Form):
             )
 
     def save(self):
-        self.cleaned_data['question'] = Question.objects.get(id=int(self.cleaned_data['question']))
+        self.cleaned_data['question'] = Question.objects.get(id=self.cleaned_data['question'])
         answer = Answer(**self.cleaned_data)
         answer.save()
         return answer
