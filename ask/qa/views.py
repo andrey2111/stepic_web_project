@@ -53,7 +53,7 @@ def popular(request):
 def question(request, id):
     try:
         question = Question.objects.get(pk=id)
-        form = AnswerForm(question)
+        form = AnswerForm()
     except Question.DoesNotExist:
         raise Http404
     try:
@@ -83,7 +83,7 @@ def ask(request):
 
 @require_POST
 def answer(request):
-    form = AnswerForm(Question.objects.get(id=int(request.POST['question'])), request.POST)
+    form = AnswerForm(request.POST)
     if form.is_valid():
         answer = form.save()
         url = answer.get_question_url()

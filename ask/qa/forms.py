@@ -4,7 +4,7 @@ from models import Question, Answer
 
 
 class AskForm(forms.Form):
-    title = forms.CharField(max_length=80)
+    title = forms.CharField()
     text = forms.CharField(widget=forms.Textarea)
 
     def clean(self):
@@ -21,11 +21,8 @@ class AskForm(forms.Form):
 
 
 class AnswerForm(forms.Form):
-    text = forms.CharField(widget=forms.Textarea, required=False)
-
-    def __init__(self, question, *args, **kwargs):
-        self.question = question
-        super(AnswerForm, self).__init__(*args, **kwargs)
+    text = forms.CharField(widget=forms.Textarea)
+    question = forms.CharField(widget=forms.HiddenInput)
 
     def clean(self):
         if self.cleaned_data['text'].find(u'хуй') > -1:
@@ -35,7 +32,7 @@ class AnswerForm(forms.Form):
             )
 
     def save(self):
-        self.cleaned_data['question'] = self.question
+        self.cleaned_data['question'] = Question.objects.get(id=int(self.cleaned_data['question']))
         answer = Answer(**self.cleaned_data)
         answer.save()
         return answer

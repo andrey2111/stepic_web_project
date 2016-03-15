@@ -14,7 +14,7 @@
 <form class="form-horizontal" method="post" action="/answer/">
     {% csrf_token %}
     <input type="hidden" value="{{ question.id }}" name="question">
-    {% for field in form %}
+    {% for field in form.visible_fields %}
         <div class="control-group
             {% if field.errors %}has-error{% endif %}">
             <label class="control-label">{{ field.label }}</label>
